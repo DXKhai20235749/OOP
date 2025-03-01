@@ -1,0 +1,5 @@
+6.1:
+
+- If the user chooses "Cancel", the message box will show "You chose: No". The argument "option == JOptionPane.YES_OPTION ?"YES":"No"" means that if the user chooses "YES", the condition fits, leading to the message box showing "YES", whereas if the user chooses any option apart from "YES", the system reacts with the other condition, which is "NO".
+
+- The modified version is in the "ChoosingOptionYesorNo.java".
