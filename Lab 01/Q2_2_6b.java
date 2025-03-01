@@ -29,5 +29,6 @@ public class Q2_2_6b {
 			else
 				System.out.println("He phuong trinh vo nghiem");
 		}
+		Shuriky.close();
 		}
 }

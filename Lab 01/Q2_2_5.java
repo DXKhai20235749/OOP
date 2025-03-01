@@ -13,5 +13,7 @@ public class Q2_2_5 {
 		}
 		else
 			System.out.println("Thuong: "+ ((double) num1 / num2));
+		Shuriky.close();
 	}
+	
 }

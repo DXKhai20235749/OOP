@@ -24,6 +24,7 @@ public class Q2_2_6c {
 		}
 		else if (delta < 0)
 		System.out.println("Phuong trinh vo nghiem");
+		Shuriky.close();
 	}
 	
 }

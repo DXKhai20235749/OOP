@@ -14,5 +14,6 @@ public class Q6_3 {
 			System.out.print("*");
 			System.out.println("");
 		}
+		num.close();
 	}
 }

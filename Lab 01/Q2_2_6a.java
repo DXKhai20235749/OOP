@@ -18,5 +18,6 @@ public class Q2_2_6a {
 		}
 		else
 		System.out.println(x);
+		Shuriky.close();
 	}
 }
