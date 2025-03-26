@@ -27,6 +27,10 @@ public class Cart {
     }; // I would prefer to use this method since I am more familiar to array methods, and it could making a list with array is quite convenient. 
     
     
+    public void addDigitalVideoDisc(DigitalVideoDisc dvd1, DigitalVideoDisc dvd2) {  // add 2 dvds in a row, should not use this if the amount is an odd number though.
+        addDigitalVideoDisc(dvd1);
+        addDigitalVideoDisc(dvd2);
+    }
     
     
 
