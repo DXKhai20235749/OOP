@@ -1,0 +1,4 @@
+Question: "When should accessor methods are used?"
+
+Answer: According to the article, accessor methods (getters and setters) should only be used in specific situations where they are truly necessary because these methods expose information about how a class is implemented and in consequence make your code harder to maintain. 
+
