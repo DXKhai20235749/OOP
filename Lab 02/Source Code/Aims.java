@@ -1,7 +1,4 @@
-package hust.soict.hedspi.aims;
-
-import hust.soict.hedspi.aims.cart.Cart;
-import hust.soict.hedspi.aims.disc.DigitalVideoDisc;
+package Package;
 
 public class Aims {
 	public static void main(String[] args) {
@@ -10,11 +7,8 @@ public class Aims {
 		DigitalVideoDisc dvd2 = new DigitalVideoDisc("Star Wars", "Science Fiction", "George Lucas", 87, 24.95f);
 		DigitalVideoDisc dvd3 = new DigitalVideoDisc("Aladin", "Animation", 18.99f);
 		DigitalVideoDisc[] dvdCart = {dvd1, dvd2, dvd3}; // Put those dvds into an array, which resembles a cart :)
-		System.out.println("***********************CART***********************");
-		System.out.println("Ordered Items:");
 		anOrder.addDigitalVideoDisc(dvdCart);
-		System.out.print("Total cost: ");
+		System.out.println("The total cost is ");
 		System.out.println(anOrder.totalCost());
-		System.out.println("***************************************************");
 	}
 }
