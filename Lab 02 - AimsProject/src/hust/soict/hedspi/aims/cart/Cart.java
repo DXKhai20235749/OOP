@@ -1,4 +1,6 @@
-package Package;
+package hust.soict.hedspi.aims.cart;
+
+import hust.soict.hedspi.aims.disc.DigitalVideoDisc;
 
 public class Cart {
 	public static final int max_order_count = 20;
@@ -11,7 +13,7 @@ public class Cart {
         } else {
             orderedItem[qtyOrdered] = disc; 
             qtyOrdered++;  
-            System.out.println("Disc added successfully!");
+            System.out.printf("%d. %s\n", qtyOrdered, disc.toString());
         }
     }
     
@@ -24,7 +26,7 @@ public class Cart {
     	{
     		addDigitalVideoDisc(disc);
     	}
-    }; // I would prefer to use this method since I am more familiar to array methods, and it could making a list with array is quite convenient. 
+    }; // I would prefer to use this method since I am more familiar to array methods, and it could make a list with array is quite convenient. 
     
     
     public void addDigitalVideoDisc(DigitalVideoDisc dvd1, DigitalVideoDisc dvd2) {  // add 2 dvds in a row, should not use this if the amount is an odd number though.
@@ -50,6 +52,45 @@ public class Cart {
         }
         if (!found) {
             System.out.println("Can't find item");
+        }
+    }
+    
+    public void searchById(int id) {
+        boolean found = false;
+        for (int i = 0; i < qtyOrdered; i++) {
+            if (orderedItem[i].getId() == id) {
+                System.out.println("Found DVD by ID:");
+                System.out.println(orderedItem[i]);
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            System.out.println("No DVD found with ID: " + id);
+        }
+    }
+
+    public void searchByTitle(String title) {
+        boolean found = false;
+        for (int i = 0; i < qtyOrdered; i++) {
+            if (orderedItem[i].isMatch(title)) {
+                System.out.println("Found DVD by Title:");
+                System.out.println(orderedItem[i]);
+                found = true;
+            }
+        }
+        if (!found) {
+            System.out.println("No DVD found with title: " + title);
+        }
+    }
+    
+    public void print() {
+        if (qtyOrdered == 0) {
+            System.out.println("The cart is empty.");
+        } else {
+            for (int i = 0; i < qtyOrdered; i++) {
+                System.out.println((i + 1) + ". " + orderedItem[i]);
+            }
         }
     }
 
