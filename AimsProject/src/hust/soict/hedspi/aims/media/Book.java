@@ -4,13 +4,11 @@ import java.util.ArrayList;
 
 public class Book extends Media {
     private ArrayList<String> authors = new ArrayList<>();
-
-    // Constructor
     public Book(int id, String title, String category, float cost) {
         super(id, title, category, cost);
     }
 
-    // Add an author
+    // Add authors
     public void addAuthor(String authorName) {
         if (!authors.contains(authorName)) {
             authors.add(authorName);
@@ -19,7 +17,7 @@ public class Book extends Media {
         }
     }
 
-    // Remove an author
+    // Remove authors
     public void removeAuthor(String authorName) {
         if (authors.contains(authorName)) {
             authors.remove(authorName);

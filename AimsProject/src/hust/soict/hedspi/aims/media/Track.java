@@ -4,13 +4,11 @@ public class Track implements Playable {
     private String title;
     private int length;
 
-    // Constructor
     public Track(String title, int length) {
         this.title = title;
         this.length = length;
     }
 
-    // Getters
     public String getTitle() {
         return title;
     }
@@ -19,7 +17,6 @@ public class Track implements Playable {
         return length;
     }
 
-    // Play method (from Playable interface)
     @Override
     public void play() {
         if (length > 0) {
@@ -30,7 +27,6 @@ public class Track implements Playable {
         }
     }
 
-    // Equals method to avoid duplicate tracks in a CD
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Track) {

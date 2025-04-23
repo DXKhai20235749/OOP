@@ -1,6 +1,7 @@
 package hust.soict.hedspi.aims.media;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public abstract class Media {
     private int id;
@@ -9,7 +10,6 @@ public abstract class Media {
     private float cost;
     
    
-    // Constructor
     public Media(int id, String title, String category, float cost) {
         this.id = id;
         this.title = title;
@@ -17,7 +17,6 @@ public abstract class Media {
         this.cost = cost;
     }
 
-    // Getters and Setters
     public int getId() {
         return id;
     }
@@ -50,10 +49,8 @@ public abstract class Media {
         this.cost = cost;
     }
 
-    // Abstract method for polymorphism demonstration
     public abstract String toString();
 
-    // Override equals for Media: equality by title
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Media) {
@@ -62,4 +59,6 @@ public abstract class Media {
         }
         return false;
     }
+    public static final Comparator<Media> COMPARE_BY_TITLE_COST = new MediaComparatorByTitleCost();
+    public static final Comparator<Media> COMPARE_BY_COST_TITLE = new MediaComparatorByCostTitle();
 }
