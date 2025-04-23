@@ -1,20 +1,12 @@
-Question: "When should accessor methods are used?"
+Q17:
+17.1Q: What class should implement the Comparable interface?
+17.1A: The class that represents the media items should implement the Comparable interface. This would include classes like DigitalVideoDisc, CD, and Book that are stored in the Cart.
 
-Answer: According to the article, accessor methods (getters and setters) should only be used in specific situations where they are truly necessary because these methods expose information about how a class is implemented and in consequence make your code harder to maintain. 
+17.2Q: In those classes, how should you implement the compareTo() method to reflect the ordering that we want?
+17.2A: You should define the comparison logic in the compareTo() method based on the criteria you want (e.g., comparing by title and cost).
 
-Question: If you create a constructor method to build a DVD by title then create a constructor method to build a DVD by category. Does JAVA allow you to do this?
+17.3Q: Can we have two ordering rules of the item (by title then cost and by cost then title) if we use this Comparable interface approach?
+17.3A: No, the Comparable interface allows only one natural ordering. If you need multiple orderings, use a separate Comparator for each rule.
 
-Answer: You are not allowed to do this in JAVA. The reason being that these two methods have the same footprint (In this case, both of these methods have the name "DigitalVideoDisc" and take one String as parameters). This directly violates overloading method principle, causing confusion the compiling process.
-
-Question:  Is JAVA a Pass by Value or a Pass by Reference programming language?
-
-Answer: JAVA is a pass-by-value programming language.
-
-Question: a) After the call of swap(jungleDVD, cinderellaDVD) why does the title of these two objects still remain?
-
-b) After the call of changeTitle(jungleDVD, cinderellaDVD.getTitle()) why is the title of the JungleDVD changed? 
-
-Answer: a) Java passes object references by value (a copy of the reference). Therefore, changing o1 and o2 inside the method does not affect the original references. As a result, after calling swap(), jungleDVD and cinderellaDVD in main() still point to the original objects.
-
-b) We could easily see that dvd.setTitle(title); works because it modifies the actual object; however, dvd = new DigitalVideoDisc(oldTitle); only changes the local reference, not the original object. As a result, jungleDVD still has the new title from setTitle(), but the new DVD object is lost after the method ends.
-
+17.4Q: Suppose the DVDs have a different ordering rule from the other media types, that is by title, then decreasing length, then cost. How would you modify your code to allow this?
+17.4A: Define a custom comparison rule for DVDs by overriding the compareTo() method in the DigitalVideoDisc class. If I need to apply different rules for different media types, I will use a custom comparator that checks the type of the media item and applies the suitable ordering.
