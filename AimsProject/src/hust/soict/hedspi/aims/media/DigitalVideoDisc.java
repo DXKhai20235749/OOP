@@ -4,14 +4,12 @@ public class DigitalVideoDisc extends Media implements Playable {
     private int length;
     private String director;
 
-    // Constructor
     public DigitalVideoDisc(int id, String title, String category, String director, int length, float cost) {
         super(id, title, category, cost);
         this.length = length;
         this.director = director;
     }
 
-    // Getters
     public int getLength() {
         return length;
     }
@@ -19,8 +17,7 @@ public class DigitalVideoDisc extends Media implements Playable {
     public String getDirector() {
         return director;
     }
-
-    // Play method (from Playable interface)
+    
     @Override
     public void play() {
         if (length > 0) {

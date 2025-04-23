@@ -1,84 +1,88 @@
 package hust.soict.hedspi.aims.cart;
 
 import hust.soict.hedspi.aims.media.Media;
+import hust.soict.hedspi.aims.store.Store;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class Cart {
-    public static final int MAX_ORDER_COUNT = 20;
-    private ArrayList<Media> itemsOrdered = new ArrayList<>();
+    private List<Media> itemsInCart;
+
+    public Cart() {
+        this.itemsInCart = new ArrayList<>();
+    }
 
     public void addMedia(Media media) {
-        if (itemsOrdered.size() >= MAX_ORDER_COUNT) {
-            System.out.println("Cart is full, maximum amount of items reached!");
+        itemsInCart.add(media);
+    }
+
+    public void removeMedia(String title) {
+        Media mediaToRemove = findMediaByTitle(title);
+        if (mediaToRemove != null) {
+            itemsInCart.remove(mediaToRemove);
+            System.out.println("Media " + title + " has been removed from the cart.");
         } else {
-            itemsOrdered.add(media);
-            System.out.printf("%d. %s\n", itemsOrdered.size(), media.toString());
+            System.out.println("Media with title " + title + " not found in cart.");
         }
     }
 
-    public void addMedia(Media[] mediaList) {
-        for (Media media : mediaList) {
-            addMedia(media);
-        }
-    }
-
-    public void addMedia(Media media1, Media media2) {
-        addMedia(media1);
-        addMedia(media2);
-    }
-
-    public void removeMedia(Media media) {
-        if (itemsOrdered.remove(media)) {
-            System.out.println("Item removed successfully");
-        } else {
-            System.out.println("Can't find item");
-        }
-    }
-
-    public void searchById(int id) {
-        boolean found = false;
-        for (Media media : itemsOrdered) {
-            if (media.getId() == id) {
-                System.out.println("Found media by ID:");
-                System.out.println(media);
-                found = true;
-                break;
-            }
-        }
-        if (!found) {
-            System.out.println("No media found with ID: " + id);
-        }
-    }
-
-    public void searchByTitle(String title) {
-        boolean found = false;
-        for (Media media : itemsOrdered) {
+    public Media findMediaByTitle(String title) {
+        for (Media media : itemsInCart) {
             if (media.getTitle().equalsIgnoreCase(title)) {
-                System.out.println("Found media by Title:");
-                System.out.println(media);
-                found = true;
+                return media;
             }
         }
-        if (!found) {
-            System.out.println("No media found with title: " + title);
+        return null;
+    }
+
+    public List<Media> getItemsInCart() {
+        return itemsInCart;
+    }
+
+    public void filterByTitle(String title) {
+        itemsInCart.stream()
+            .filter(media -> media.getTitle().contains(title))
+            .forEach(media -> System.out.println(media.toString()));
+    }
+
+    public void filterById(int id) {
+        itemsInCart.stream()
+            .filter(media -> media.getId() == id)
+            .forEach(media -> System.out.println(media.toString()));
+    }
+
+    public void sortByTitle() {
+        itemsInCart.sort((media1, media2) -> media1.getTitle().compareTo(media2.getTitle()));
+        System.out.println("Cart sorted by title: ");
+        for (Media media : itemsInCart) {
+            System.out.println(media.toString());
         }
     }
 
-    public void print() {
-        if (itemsOrdered.isEmpty()) {
+    public void sortByCost() {
+        itemsInCart.sort((media1, media2) -> Float.compare(media1.getCost(), media2.getCost()));
+        System.out.println("Cart sorted by cost: ");
+        for (Media media : itemsInCart) {
+            System.out.println(media.toString());
+        }
+    }
+
+    public void clearCart() {
+        itemsInCart.clear();
+        System.out.println("The cart is now empty.");
+    }
+
+
+
+    public void printCart() {
+        if (itemsInCart.isEmpty()) {
             System.out.println("The cart is empty.");
         } else {
-            for (int i = 0; i < itemsOrdered.size(); i++) {
-                System.out.println((i + 1) + ". " + itemsOrdered.get(i));
+            System.out.println("Items in Cart:");
+            for (Media media : itemsInCart) {
+                System.out.println(media.toString());
             }
         }
-    }
-
-    public float totalCost() {
-        float total = 0;
-        for (Media media : itemsOrdered) {
-            total += media.getCost();
-        }
-        return total;
     }
 }

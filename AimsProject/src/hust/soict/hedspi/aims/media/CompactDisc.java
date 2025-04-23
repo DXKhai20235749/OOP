@@ -6,9 +6,8 @@ public class CompactDisc extends Disc {
     private String artist;
     private ArrayList<Track> tracks;
 
-    // Constructor
     public CompactDisc(int id, String title, String category, String director, String artist, int length, float cost) {
-        super(id, title, category, director, length, cost);  // Gọi constructor mới của Disc có thêm id
+        super(id, title, category, director, length, cost);
         this.artist = artist;
         this.tracks = new ArrayList<>();
     }
