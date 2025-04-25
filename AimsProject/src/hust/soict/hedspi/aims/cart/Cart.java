@@ -51,7 +51,7 @@ public class Cart {
             .filter(media -> media.getId() == id)
             .forEach(media -> System.out.println(media.toString()));
     }
-
+//.
     public void sortByTitle() {
         itemsInCart.sort((media1, media2) -> media1.getTitle().compareTo(media2.getTitle()));
         System.out.println("Cart sorted by title: ");
