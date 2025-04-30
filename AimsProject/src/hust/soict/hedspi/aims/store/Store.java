@@ -1,6 +1,7 @@
 package hust.soict.hedspi.aims.store;
 
 import hust.soict.hedspi.aims.media.Media;
+
 import hust.soict.hedspi.aims.cart.Cart;
 import hust.soict.hedspi.aims.media.Playable;
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Store {
-    private List<Media> itemsInStore;
+    private ArrayList<Media> itemsInStore;
 
     public Store() {
         this.itemsInStore = new ArrayList<>();
@@ -37,7 +38,7 @@ public class Store {
         return null;
     }
 
-    public List<Media> getItemsInStore() {
+    public ArrayList<Media> getItemsInStore() {
         return itemsInStore;
     }
 
