@@ -1,34 +1,29 @@
 package hust.soict.hedspi.aims.cart;
 
 import hust.soict.hedspi.aims.media.Media;
-import hust.soict.hedspi.aims.store.Store;
-
-import java.util.ArrayList;
-import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Cart {
-    private List<Media> itemsInCart;
-
-    public Cart() {
-        this.itemsInCart = new ArrayList<>();
-    }
+    private final ObservableList<Media> itemsOrdered = FXCollections.observableArrayList();
 
     public void addMedia(Media media) {
-        itemsInCart.add(media);
+        if (media != null) {
+            itemsOrdered.add(media);
+        }
     }
 
-    public void removeMedia(String title) {
-        Media mediaToRemove = findMediaByTitle(title);
-        if (mediaToRemove != null) {
-            itemsInCart.remove(mediaToRemove);
-            System.out.println("Media " + title + " has been removed from the cart.");
+    public void removeMedia(Media media) {
+        if (media != null && itemsOrdered.contains(media)) {
+            itemsOrdered.remove(media);
+            System.out.println("Media " + media.getTitle() + " has been removed from the cart.");
         } else {
-            System.out.println("Media with title " + title + " not found in cart.");
+            System.out.println("Media not found in cart.");
         }
     }
 
     public Media findMediaByTitle(String title) {
-        for (Media media : itemsInCart) {
+        for (Media media : itemsOrdered) {
             if (media.getTitle().equalsIgnoreCase(title)) {
                 return media;
             }
@@ -36,53 +31,45 @@ public class Cart {
         return null;
     }
 
-    public List<Media> getItemsInCart() {
-        return itemsInCart;
+    public ObservableList<Media> getItemsOrdered() {
+        return itemsOrdered;
     }
 
     public void filterByTitle(String title) {
-        itemsInCart.stream()
+        itemsOrdered.stream()
             .filter(media -> media.getTitle().contains(title))
-            .forEach(media -> System.out.println(media.toString()));
+            .forEach(System.out::println);
     }
 
     public void filterById(int id) {
-        itemsInCart.stream()
+        itemsOrdered.stream()
             .filter(media -> media.getId() == id)
-            .forEach(media -> System.out.println(media.toString()));
+            .forEach(System.out::println);
     }
-//.
+
     public void sortByTitle() {
-        itemsInCart.sort((media1, media2) -> media1.getTitle().compareTo(media2.getTitle()));
-        System.out.println("Cart sorted by title: ");
-        for (Media media : itemsInCart) {
-            System.out.println(media.toString());
-        }
+        FXCollections.sort(itemsOrdered, (m1, m2) -> m1.getTitle().compareTo(m2.getTitle()));
+        System.out.println("Cart sorted by title:");
+        itemsOrdered.forEach(System.out::println);
     }
 
     public void sortByCost() {
-        itemsInCart.sort((media1, media2) -> Float.compare(media1.getCost(), media2.getCost()));
-        System.out.println("Cart sorted by cost: ");
-        for (Media media : itemsInCart) {
-            System.out.println(media.toString());
-        }
+        FXCollections.sort(itemsOrdered, (m1, m2) -> Float.compare(m1.getCost(), m2.getCost()));
+        System.out.println("Cart sorted by cost:");
+        itemsOrdered.forEach(System.out::println);
     }
 
     public void clearCart() {
-        itemsInCart.clear();
+        itemsOrdered.clear();
         System.out.println("The cart is now empty.");
     }
 
-
-
     public void printCart() {
-        if (itemsInCart.isEmpty()) {
+        if (itemsOrdered.isEmpty()) {
             System.out.println("The cart is empty.");
         } else {
             System.out.println("Items in Cart:");
-            for (Media media : itemsInCart) {
-                System.out.println(media.toString());
-            }
+            itemsOrdered.forEach(System.out::println);
         }
     }
 }
