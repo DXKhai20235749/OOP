@@ -1,10 +1,13 @@
 package hust.soict.hedspi.aims;
 
 import hust.soict.hedspi.aims.cart.Cart;
+import hust.soict.hedspi.aims.exception.PlayerException;
 import hust.soict.hedspi.aims.media.*;
 import hust.soict.hedspi.aims.store.Store;
 
 import java.util.Scanner;
+
+import javax.swing.JOptionPane;
 
 public class Aims {
     public static void main(String[] args) {
@@ -148,7 +151,7 @@ public class Aims {
     public static void addMediaToCart(Scanner scanner, Media media, Cart cart) {
         if (media != null) {
             cart.addMedia(media);
-            System.out.println("Media added to cart. Current number of items in cart: " + cart.getItemsInCart().size());
+            System.out.println("Media added to cart. Current number of items in cart: " + cart.getItemsOrdered().size());
         } else {
             System.out.println("Media not found.");
         }
@@ -159,7 +162,7 @@ public class Aims {
         String title = scanner.nextLine();
         Media media = findMediaByTitle(store, title);
         if (media != null && media instanceof Playable) {
-            ((Playable) media).play();
+            playMedia(media); // uses the updated version above
         } else {
             System.out.println("Media not found or cannot be played.");
         }
@@ -167,7 +170,18 @@ public class Aims {
 
     public static void playMedia(Media media) {
         if (media instanceof Playable) {
-            ((Playable) media).play();
+            try {
+                ((Playable) media).play();
+            } catch (PlayerException e) {
+                System.out.println("Exception!");
+                System.out.println("Message: " + e.getMessage());
+                System.out.println("ToString: " + e.toString());
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null,
+                    "Exception while playing media:\n" + e.getMessage(),
+                    "Playback Error",
+                    JOptionPane.ERROR_MESSAGE);
+            }
         } else {
             System.out.println("This media cannot be played.");
         }
@@ -202,12 +216,12 @@ public class Aims {
     }
 
     public static void displayCart(Cart cart, Scanner scanner) {
-        if (cart.getItemsInCart().isEmpty()) {
+        if (cart.getItemsOrdered().isEmpty()) {
             System.out.println("The cart is empty.");
         } else {
             System.out.println("Items in Cart: ");
-            for (int i = 0; i < cart.getItemsInCart().size(); i++) {
-                System.out.println((i + 1) + ". " + cart.getItemsInCart().get(i).toString());
+            for (int i = 0; i < cart.getItemsOrdered().size(); i++) {
+                System.out.println((i + 1) + ". " + cart.getItemsOrdered().get(i).toString());
             }
         }
         cartMenu(scanner, cart);
@@ -236,7 +250,7 @@ public class Aims {
                 sortCart(scanner, cart);
                 break;
             case 3:
-                removeMediaFromCart(scanner, cart);
+                
                 break;
             case 4:
                 break;
@@ -296,12 +310,7 @@ public class Aims {
                 System.out.println("Invalid choice.");
         }
     }
-
-    public static void removeMediaFromCart(Scanner scanner, Cart cart) {
-        System.out.print("Enter the title of the media to remove from cart: ");
-        String title = scanner.nextLine();
-        cart.removeMedia(title);
-    }
+    
 
     public static void placeOrder(Cart cart) {
         System.out.println("Order created successfully.");

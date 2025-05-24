@@ -1,12 +1,4 @@
-Q17:
-17.1Q: What class should implement the Comparable interface?
-17.1A: The class that represents the media items should implement the Comparable interface. This would include classes like DigitalVideoDisc, CD, and Book that are stored in the Cart.
-
-17.2Q: In those classes, how should you implement the compareTo() method to reflect the ordering that we want?
-17.2A: You should define the comparison logic in the compareTo() method based on the criteria you want (e.g., comparing by title and cost).
-
-17.3Q: Can we have two ordering rules of the item (by title then cost and by cost then title) if we use this Comparable interface approach?
-17.3A: No, the Comparable interface allows only one natural ordering. If you need multiple orderings, use a separate Comparator for each rule.
-
-17.4Q: Suppose the DVDs have a different ordering rule from the other media types, that is by title, then decreasing length, then cost. How would you modify your code to allow this?
-17.4A: Define a custom comparison rule for DVDs by overriding the compareTo() method in the DigitalVideoDisc class. If I need to apply different rules for different media types, I will use a custom comparator that checks the type of the media item and applies the suitable ordering.
+Q11: The Aims class must be updated to handle any exceptions generated when the play() methods 
+are called. What happens when you don’t update for them to catch?
+ 
+A: If you don’t update the Aims class to catch exceptions from the play() methods, the program will crash at runtime when a PlayerException is thrown, showing an error and halting execution. Using a try-catch block allows the program to handle the error gracefully, print diagnostic information, and continue running.
