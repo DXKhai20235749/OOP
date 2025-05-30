@@ -1,0 +1,4 @@
+Q11: The Aims class must be updated to handle any exceptions generated when the play() methods 
+are called. What happens when you don’t update for them to catch?
+ 
+A: If you don’t update the Aims class to catch exceptions from the play() methods, the program will crash at runtime when a PlayerException is thrown, showing an error and halting execution. Using a try-catch block allows the program to handle the error gracefully, print diagnostic information, and continue running.
