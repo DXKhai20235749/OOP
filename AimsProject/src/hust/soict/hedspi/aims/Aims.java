@@ -1,6 +1,7 @@
 package hust.soict.hedspi.aims;
 
 import hust.soict.hedspi.aims.cart.Cart;
+import hust.soict.hedspi.aims.exception.LimitExceededException;
 import hust.soict.hedspi.aims.exception.PlayerException;
 import hust.soict.hedspi.aims.media.*;
 import hust.soict.hedspi.aims.store.Store;
@@ -10,7 +11,7 @@ import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 public class Aims {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws LimitExceededException {
         Scanner scanner = new Scanner(System.in);
         Store store = new Store();
         Cart cart = new Cart();
@@ -55,7 +56,7 @@ public class Aims {
         System.out.print("Please choose a number: 0-1-2-3 ");
     }
 
-    public static void displayStore(Store store, Scanner scanner, Cart cart) {
+    public static void displayStore(Store store, Scanner scanner, Cart cart) throws LimitExceededException {
         if (store.getItemsInStore().isEmpty()) {
             System.out.println("The store is empty.");
         } else {
@@ -67,7 +68,7 @@ public class Aims {
         storeMenu(scanner, store, cart);
     }
 
-    public static void storeMenu(Scanner scanner, Store store, Cart cart) {
+    public static void storeMenu(Scanner scanner, Store store, Cart cart) throws LimitExceededException {
         System.out.println("Options: ");
         System.out.println("--------------------------------");
         System.out.println("1. See a media’s details");
@@ -100,7 +101,7 @@ public class Aims {
         }
     }
 
-    public static void seeMediaDetails(Scanner scanner, Store store, Cart cart) {
+    public static void seeMediaDetails(Scanner scanner, Store store, Cart cart) throws LimitExceededException {
         System.out.print("Enter the title of the media: ");
         String title = scanner.nextLine();
         Media media = findMediaByTitle(store, title);
@@ -112,7 +113,7 @@ public class Aims {
         }
     }
 
-    public static void mediaDetailsMenu(Scanner scanner, Media media, Cart cart) {
+    public static void mediaDetailsMenu(Scanner scanner, Media media, Cart cart) throws LimitExceededException {
         System.out.println("Options: ");
         System.out.println("--------------------------------");
         System.out.println("1. Add to cart");
@@ -148,7 +149,7 @@ public class Aims {
         return null;
     }
 
-    public static void addMediaToCart(Scanner scanner, Media media, Cart cart) {
+    public static void addMediaToCart(Scanner scanner, Media media, Cart cart) throws LimitExceededException {
         if (media != null) {
             cart.addMedia(media);
             System.out.println("Media added to cart. Current number of items in cart: " + cart.getItemsOrdered().size());

@@ -1,6 +1,7 @@
 package hust.soict.hedspi.aims.screen.customer.controller;
 
 import hust.soict.hedspi.aims.cart.Cart;
+import hust.soict.hedspi.aims.exception.LimitExceededException;
 import hust.soict.hedspi.aims.exception.PlayerException;
 import hust.soict.hedspi.aims.media.Media;
 import hust.soict.hedspi.aims.media.Playable;
@@ -28,14 +29,14 @@ public class ItemController {
     private Media media;
     private Cart cart;
 
-    public ItemController(Cart cart) {
+    public void setCart(Cart cart) {
         this.cart = cart;
     }
 
     public void setData(Media media) {
         this.media = media;
         lblTitle.setText(media.getTitle());
-        lblCost.setText(media.getCost() + " $");
+        lblCost.setText(String.format("%.2f $", media.getCost()));
 
         if (media instanceof Playable) {
             btnPlay.setVisible(true);
@@ -46,14 +47,14 @@ public class ItemController {
     }
 
     @FXML
-    void btnAddToCartPressed(ActionEvent event) {
+    void btnAddToCartClicked(ActionEvent event) throws LimitExceededException {
         if (cart != null && media != null) {
             cart.addMedia(media);
         }
     }
 
     @FXML
-    void btnPlayPressed(ActionEvent event) throws PlayerException{
+    void btnPlayClicked(ActionEvent event) throws PlayerException {
         if (media instanceof Playable) {
             ((Playable) media).play();
         }

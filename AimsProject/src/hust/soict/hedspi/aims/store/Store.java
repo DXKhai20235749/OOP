@@ -3,6 +3,7 @@ package hust.soict.hedspi.aims.store;
 import hust.soict.hedspi.aims.media.Media;
 
 import hust.soict.hedspi.aims.cart.Cart;
+import hust.soict.hedspi.aims.exception.LimitExceededException;
 import hust.soict.hedspi.aims.exception.PlayerException;
 import hust.soict.hedspi.aims.media.Playable;
 import java.util.ArrayList;
@@ -66,7 +67,7 @@ public class Store {
     }
 
     // addMediaToCart with Scanner
-    public void addMediaToCart(Scanner scanner, Cart cart) {
+    public void addMediaToCart(Scanner scanner, Cart cart) throws LimitExceededException {
         System.out.print("Enter the title of the media to add to cart: ");
         String title = scanner.nextLine();
         Media media = findMediaByTitle(title);
